@@ -41,3 +41,5 @@ typing-extensions==3.10.0.0
 watchgod==0.7
 websockets==8.1
 wrapt==1.12.1
+MySQL-python
+MySQLdb
