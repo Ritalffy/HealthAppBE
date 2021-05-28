@@ -1,11 +1,8 @@
 import uvicorn
-
-from .features import models, schemas, crud
-
-from .features.database import engine, SessionLocal
-
 from sqlalchemy.orm import Session
 from fastapi import Depends, FastAPI, HTTPException
+from sql_app import models, schemas, crud
+from sql_app.database import engine, SessionLocal
 from fastapi_crudrouter import SQLAlchemyCRUDRouter
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, String, Float, Integer
