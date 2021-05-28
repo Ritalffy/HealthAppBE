@@ -26,7 +26,6 @@ pydantic==1.8.2
 pygame==2.0.1
 PyJWT==2.1.0
 pylint==2.7.2
-MySQLdb==5.5
 PyMySQL==0.9.3
 PyOpenGL==3.1.5
 PyOpenGL-accelerate==3.1.5
