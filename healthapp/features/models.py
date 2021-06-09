@@ -8,6 +8,7 @@ class UserInfo(Base):
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String, unique=True)
     password = Column(String)
+    role = Column(String, default="patient")
 
 class PersonModel(Base):
     __tablename__ = 'Person'

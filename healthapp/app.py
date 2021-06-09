@@ -32,7 +32,7 @@ def get_db():
 
 @app.post("/user", response_model=schemas.UserInfo)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
-    db_user = crud.get_user_by_username(db, username=user.username)
+    db_user = crud.get_user_by_username(db, email=user.email)
     if db_user:
         raise HTTPException(status_code=400, detail="Username already registered")
     return crud.create_user(db=db, user=user)
@@ -40,7 +40,7 @@ def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
 
 @app.post("/authenticate", response_model=schemas.Token)
 def authenticate_user(user: schemas.UserAuthenticate, db: Session = Depends(get_db)):
-    db_user = crud.get_user_by_username(db, username=user.username)
+    db_user = crud.get_user_by_username(db, email=user.email)
     if db_user is None:
         raise HTTPException(status_code=400, detail="Username doesnt exist")
     else:
@@ -52,8 +52,8 @@ def authenticate_user(user: schemas.UserAuthenticate, db: Session = Depends(get_
             access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
             from .features.app_utils import create_access_token
             access_token = create_access_token(
-                data={"sub": user.username}, expires_delta=access_token_expires)
-            return {"access_token": access_token, "token_type": "Bearer"}
+                data={"sub": user.email}, expires_delta=access_token_expires)
+            return {"access_token": access_token, "token_type": "Bearer","role":db_user.role}
 
 
 @app.get("/getID/{username}")
