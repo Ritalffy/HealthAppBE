@@ -8,6 +8,8 @@ class UserInfoBase(BaseModel):
 
 class UserCreate(UserInfoBase):
     password: str
+    role:str
+    profession:str
 
 
 class UserAuthenticate(UserInfoBase):
@@ -20,6 +22,9 @@ class UserInfo(UserInfoBase):
     class Config:
         orm_mode = True
 
+
+class Profession(BaseModel):
+    name:str
 
 class Token(BaseModel):
     access_token: str
@@ -39,6 +44,7 @@ class PersonCreate(BaseModel):
     City:str
     Zip:str
     Phone:str
+
 
 class Person(PersonCreate):
     id: int

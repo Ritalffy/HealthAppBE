@@ -9,6 +9,9 @@ def get_user_by_username(db: Session, email: str):
 def get_user_ID(db: Session, email: str):
     return db.query(models.UserInfo.id).filter(models.UserInfo.email == email).first()
 
+def get_professions(db: Session):
+    return db.query(models.ProfessionModel.name).all()
+
 
 def create_user(db: Session, user: schemas.UserCreate):
     hashed_password = bcrypt.hashpw(user.password.encode('utf-8'), bcrypt.gensalt())

@@ -53,13 +53,19 @@ def authenticate_user(user: schemas.UserAuthenticate, db: Session = Depends(get_
             from .features.app_utils import create_access_token
             access_token = create_access_token(
                 data={"sub": user.email}, expires_delta=access_token_expires)
-            return {"access_token": access_token, "token_type": "Bearer","role":db_user.role}
+            return {"access_token": access_token,"role":db_user.role}
 
 
 @app.get("/getID/{username}")
-async def getID(username:str,db: Session = Depends(get_db)):
+async def get_ID(username:str,db: Session = Depends(get_db)):
     db_user = crud.get_user_ID(db, username)
     return db_user
+
+
+@app.get("/professions")
+async def get_Professions(db: Session = Depends(get_db)):
+    profession = crud.get_professions(db)
+    return profession
 
 Base = declarative_base()
 Base.metadata.create_all(bind=engine)
