@@ -6,7 +6,7 @@ class UserInfo(Base):
     __tablename__ = "Login"
 
     id = Column(Integer, primary_key=True, index=True)
-    username = Column(String, unique=True)
+    email = Column(String, unique=True)
     password = Column(String)
 
 class PersonModel(Base):

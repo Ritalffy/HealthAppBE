@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 
 class UserInfoBase(BaseModel):
-    username: str
+    email: str
 
 
 class UserCreate(UserInfoBase):
@@ -27,7 +27,7 @@ class Token(BaseModel):
 
 
 class TokenData(BaseModel):
-    username: str = None
+    email: str = None
 
 
 
