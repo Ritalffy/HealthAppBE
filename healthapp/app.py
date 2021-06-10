@@ -53,7 +53,7 @@ def authenticate_user(user: schemas.UserAuthenticate, db: Session = Depends(get_
             from .features.app_utils import create_access_token
             access_token = create_access_token(
                 data={"sub": user.email}, expires_delta=access_token_expires)
-            return {"access_token": access_token,"role":db_user.role}
+            return {"access_token": access_token,"token_type":"bearer","role":db_user.role}
 
 
 @app.get("/getID/{username}")
