@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-SQLALCHEMY_DATABASE_URL = "mysql://y3PEGk4hg7:vUgoCTmya8@remotemysql.com:3306/y3PEGk4hg7"
+SQLALCHEMY_DATABASE_URL = "mysql://freedbtech_gacu:m@JAbVeRXVpe!a9@freedb.tech:3306/freedbtech_healthapp"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL,
