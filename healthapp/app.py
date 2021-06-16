@@ -67,6 +67,48 @@ async def get_Professions(db: Session = Depends(get_db)):
     profession = crud.get_professions(db)
     return profession
 
+
+# @app.get("/visits/{profession}")
+# async def get_visits_profession(profession:str,db:Session=Depends(get_db)):
+#     visits_profession=crud.get_visits_profesion(db,profession)
+#     return visits_profession
+
+
+    
+# @app.get("/AllFreeVisits")
+# async def get_AllFreeVisits(db:Session=Depends(get_db)):
+#     AllFreeVisits=crud.get_AllFreeVisits(db)
+#     return AllFreeVisits
+
+
+@app.get("/AllDoctorVisits/{id}")
+async def get_AllVisits(id:int,db:Session=Depends(get_db)):
+    AllVisits=crud.get_AllVisits(db,id)
+    return AllVisits
+
+
+# @app.get("/Name")
+# async def nameAll(db:Session=Depends(get_db)):
+#     AllVisits=crud.nameAll(db)
+#     return AllVisits
+
+@app.get("/doctors")
+async def doctors(db:Session=Depends(get_db)):
+    doctors=crud.doctors(db)
+    return doctors
+
+#WOLNE WIZYTY BY PROFESJA
+@app.get("/AllVisitsName/{name}")
+async def get_byName(name:str,db:Session=Depends(get_db)):
+    get_byname=crud.get_byName(db,name)
+    return get_byname
+
+
+@app.get("/AllVisitsProfession/{profession}")
+async def get_byProfession(profession:str,db:Session=Depends(get_db)):
+    get_byprofession=crud.get_byProfession(db,profession)
+    return get_byprofession
+
 Base = declarative_base()
 Base.metadata.create_all(bind=engine)
 
@@ -82,8 +124,30 @@ persons = SQLAlchemyCRUDRouter(
 )
 
 
+Tests = SQLAlchemyCRUDRouter(
+    schema=schemas.Test,
+    create_schema=schemas.Test,
+    db_model=models.TestModel,
+    db=get_db,
+    prefix='Test'
+)
+
+
+Visits = SQLAlchemyCRUDRouter(
+    schema=schemas.VisitAll,
+    create_schema=schemas.VisitCreate,
+    db_model=models.VisitModel,
+    db=get_db,
+    prefix='Visit'
+)
+
+
+
 
 app.include_router(persons)
+# app.include_router(Tests)
+app.include_router(Visits)
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8081)

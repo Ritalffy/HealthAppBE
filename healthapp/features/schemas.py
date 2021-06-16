@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import List
 from pydantic import BaseModel
 
@@ -52,6 +53,34 @@ class Person(PersonCreate):
     class Config:
         orm_mode = True
 
+class Test(BaseModel):
+    profession_id:int
+    class Config:
+        orm_mode=True
+
+
+class VisitCreate(BaseModel):
+    date_start:datetime
+    date_end:datetime
+    doctor_id:int
+class Visit(VisitCreate):
+    id:int
+    date_start:datetime
+    date_end:datetime
+    doctor_id:int
+    
+    class Config:
+        orm_mode=True
+
+class VisitAll(BaseModel):
+    date_start:datetime
+    date_end:datetime
+    doctor_id:int
+    patient_id:int
+    note:str
+    
+    class Config:
+        orm_mode=True
 
 
 
