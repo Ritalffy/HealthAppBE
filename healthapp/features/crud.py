@@ -82,3 +82,8 @@ def get_byProfession(db: Session,profession:str):
 #     for a,b in db.query(models.TestModel,models.ProfessionModel).join(models.ProfessionModel).all():
 #         test.append("ID:{} Profession:{}".format(a.id,b.name))
 #     return jsonable_encoder(test)
+
+
+def get_AllUserVisits(db: Session,id:str):
+    return db.query(models.VisitModel.date_start,models.VisitModel.date_end,models.PersonModel.FirstName +" "+models.PersonModel.LastName,models.VisitModel.note).filter(models.VisitModel.patient_id == id).filter(models.VisitModel.doctor_id == models.PersonModel.id).all()
+

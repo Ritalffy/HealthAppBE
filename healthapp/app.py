@@ -87,6 +87,11 @@ async def get_AllVisits(id:int,db:Session=Depends(get_db)):
     return AllVisits
 
 
+@app.get("/AllUserVisits/{id}")
+async def get_AllUserVisits(id:int,db:Session=Depends(get_db)):
+    AllVisits=crud.get_AllUserVisits(db,id)
+    return AllVisits
+
 # @app.get("/Name")
 # async def nameAll(db:Session=Depends(get_db)):
 #     AllVisits=crud.nameAll(db)
