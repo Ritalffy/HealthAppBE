@@ -59,6 +59,12 @@ class Test(BaseModel):
         orm_mode=True
 
 
+# class VisitUpdate(BaseModel):
+#     id:int
+#     patient_id:int
+class VisitUpdate(BaseModel):
+    id:int
+    patient_id:int
 class VisitCreate(BaseModel):
     date_start:datetime
     date_end:datetime

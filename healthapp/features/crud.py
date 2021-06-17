@@ -29,6 +29,14 @@ def create_user(db: Session, user: schemas.UserCreate):
     return db_user
 
 
+def reserveVisit(db: Session,user:schemas.VisitUpdate):
+    visit=db.query(models.VisitModel).filter(models.VisitModel.id==user.id).first()
+    visit.patient_id=user.patient_id
+    db.commit()
+    db.refresh(visit)
+    return visit
+
+
 def check_username_password(db: Session, user: schemas.UserAuthenticate):
     db_user_info: models.UserInfo = get_user_by_username(db, email=user.email)
     return bcrypt.checkpw(user.password.encode('utf-8'), db_user_info.password.encode('utf-8'))

@@ -1,3 +1,4 @@
+from fastapi.encoders import jsonable_encoder
 import uvicorn
 
 from .features import models, schemas, crud
@@ -36,6 +37,12 @@ def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     if db_user:
         raise HTTPException(status_code=400, detail="Username already registered")
     return crud.create_user(db=db, user=user)
+
+@app.post("/reservation")
+async def reserve_visit(user: schemas.VisitUpdate, db: Session = Depends(get_db)):
+    reserveVisit=crud.reserveVisit(db=db,user=user)
+    return reserveVisit
+
 
 
 @app.post("/authenticate", response_model=schemas.Token)
@@ -113,6 +120,8 @@ async def get_byName(name:str,db:Session=Depends(get_db)):
 async def get_byProfession(profession:str,db:Session=Depends(get_db)):
     get_byprofession=crud.get_byProfession(db,profession)
     return get_byprofession
+
+
 
 Base = declarative_base()
 Base.metadata.create_all(bind=engine)
