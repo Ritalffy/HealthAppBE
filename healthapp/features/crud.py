@@ -16,7 +16,7 @@ def get_professions(db: Session):
 
 def create_user(db: Session, user: schemas.UserCreate):
     hashed_password = bcrypt.hashpw(user.password.encode('utf-8'), bcrypt.gensalt())
-    db_user = models.UserInfo(email=user.email, password=hashed_password)
+    db_user = models.UserInfo(email=user.email, password=hashed_password,role=user.role,profession=user.profession)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
